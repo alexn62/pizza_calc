@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_calc/screens/main_page.dart';
 import 'package:pizza_calc/services/general_services.dart';
 import 'package:provider/provider.dart';
-import 'constants/colors.dart';
-import '';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

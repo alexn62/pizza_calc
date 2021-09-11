@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_calc/constants/spacing.dart';
 import 'package:pizza_calc/services/general_services.dart';
+import 'package:pizza_calc/widgets/amount_counter.dart';
+import 'package:pizza_calc/widgets/divider_with_title.dart';
 import 'package:pizza_calc/widgets/generic_button.dart';
 import 'package:pizza_calc/widgets/ingredient_component.dart';
+import 'package:pizza_calc/widgets/usa_mode_bg.dart';
+import 'package:pizza_calc/widgets/usa_mode_switch.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
@@ -15,20 +19,9 @@ class MainPage extends StatelessWidget {
     final model = Provider.of<GeneralServices>(context);
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Theme.of(context).primaryColor,  
           appBar: AppBar(
-            flexibleSpace: !model.usaMode
-                ? Container()
-                : Container(
-                    decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                        image: const AssetImage(
-                          'assets/usa_flag.jpg',
-                        )),
-                  )),
+            flexibleSpace: !model.usaMode ? Container() : const USAModeBg(),
             elevation: 0,
             actions: [
               Icon(
@@ -56,7 +49,7 @@ class MainPage extends StatelessWidget {
             ],
             centerTitle: false,
             title: Text(
-              'Pizza',
+              'Pizza Calculator',
               style: TextStyle(color: Theme.of(context).backgroundColor),
             ),
             backgroundColor: Theme.of(context).primaryColor,
@@ -66,88 +59,67 @@ class MainPage extends StatelessWidget {
               preferredSize: const Size.fromHeight(1.0),
             ),
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+          bottomNavigationBar: USAModeSwitch(model: model),
+          body: ListView(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               vRegularSpace,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   children: [
-                    GenericButton(title: 'Small', active: model.size == PizzaSize.Small ?  true : false, onTap: () => model.setSize(PizzaSize.Small)),
+                    GenericButton(
+                        title: 'Small',
+                        active: model.size == PizzaSize.Small ? true : false,
+                        onTap: () => model.setSize(PizzaSize.Small)),
                     hTinySpace,
-                    GenericButton(title: 'Medium', active: model.size == PizzaSize.Medium ?  true : false, onTap: () => model.setSize(PizzaSize.Medium)),
+                    GenericButton(
+                        title: 'Medium',
+                        active: model.size == PizzaSize.Medium ? true : false,
+                        onTap: () => model.setSize(PizzaSize.Medium)),
                     hTinySpace,
-                    GenericButton(title: 'Large', active:model.size == PizzaSize.Large ?  true : false, onTap: () => model.setSize(PizzaSize.Large)),
+                    GenericButton(
+                        title: 'Large',
+                        active: model.size == PizzaSize.Large ? true : false,
+                        onTap: () => model.setSize(PizzaSize.Large)),
                   ],
                 ),
               ),
               vRegularSpace,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: model.decreaseAmount,
-                    icon: Icon(Icons.remove,
-                        color: Theme.of(context).backgroundColor),
-                  ),
-                  SizedBox(
-                    height: 45,
-                    width: 45,
-                    child: Center(
-                      child: Text(
-                        model.amount.toString(),
-                        style: TextStyle(
-                            fontSize: 22,
-                            color: Theme.of(context).backgroundColor),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: model.increaseAmount,
-                    icon: Icon(
-                      Icons.add,
-                      color: Theme.of(context).backgroundColor,
-                    ),
-                  ),
-                ],
-              ),
+              const DividerWithTitle(title: 'Servings'),
+              vRegularSpace,
+              AmountCounter(model: model),
+              vRegularSpace,
+              const DividerWithTitle(title: 'Dough'),
               vRegularSpace,
               IngredientComponent(title: 'Flour', value: model.flour),
-              vBigSpace, 
+              vBigSpace,
               IngredientComponent(title: 'Water', value: model.water),
-              vRegularSpace, 
-              Expanded(child: Container()),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Center(
-                      child: Text('NON USA MODE',
-                          style: TextStyle(
-                              color: Theme.of(context).backgroundColor))),
-                  Switch.adaptive(
-                    value: model.usaMode,
-                    onChanged: (val) {
-                      model.setUsaMode(val);
-                    },
-                    thumbColor: MaterialStateProperty.all(
-                        Theme.of(context).backgroundColor),
-                    inactiveTrackColor:
-                        Theme.of(context).backgroundColor.withOpacity(.2),
-                    activeTrackColor:
-                        Theme.of(context).backgroundColor.withOpacity(.8),
-                  ),
-                  Center(
-                      child: Text('USA MODE',
-                          style: TextStyle(
-                              color: Theme.of(context).backgroundColor))),
-                ],
-              ),
-              vRegularSpace
+              vBigSpace,
+              IngredientComponent(
+                  title: 'Active Dry Yeast', value: model.yeast),
+              vBigSpace,
+              IngredientComponent(title: 'Salt', value: model.salt),
+              vRegularSpace,
+              const DividerWithTitle(title: 'Sauce'),
+              vRegularSpace,
+              IngredientComponent(
+                  title: 'San Marzano Tomatoes', value: model.tomatoes),
+              vBigSpace,
+              IngredientComponent(title: 'Olive Oil', value: model.olive_oil),
+              vBigSpace,
+              IngredientComponent(title: 'Salt', value: model.sauce_salt),
+              vBigSpace,
+              IngredientComponent(title: 'Basil', value: model.basil),
+              vBigSpace,
+              IngredientComponent(title: 'Pepper', value: model.pepper),
+              vRegularSpace,
+              
             ],
           )),
     );
   }
 }
-
