@@ -110,7 +110,9 @@ class GeneralServices extends ChangeNotifier {
               .toStringAsFixed(1) +
           ' oz';
     }
-    return (WATER_PER_SERVING_MILLILITEERS * amount).toStringAsFixed(0) + ' ml';
+    return (WATER_PER_SERVING_MILLILITEERS * amount * sizeConversion)
+            .toStringAsFixed(0) +
+        ' ml';
   }
 
   // yeast
@@ -188,7 +190,8 @@ class GeneralServices extends ChangeNotifier {
 
   String get basil {
     return (BASIL_LEAVES_PER_SERVING * amount * sizeConversion)
-        .toStringAsFixed(0) + ' leaves';
+            .toStringAsFixed(0) +
+        ' leaves';
   }
 
   // olive oil
