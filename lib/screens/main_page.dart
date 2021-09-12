@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_calc/constants/spacing.dart';
 import 'package:pizza_calc/enums/enums.dart';
 import 'package:pizza_calc/services/general_services.dart';
@@ -50,10 +51,10 @@ class MainPage extends StatelessWidget {
             hRegularSpace,
           ],
           centerTitle: false,
-          title: Text(
-            'Pizza Calculator',
-            style: TextStyle(color: Theme.of(context).backgroundColor),
-          ),
+          title: Text('Pizza Calculator',
+              style: GoogleFonts.robotoMono().copyWith(
+                fontWeight: FontWeight.bold,
+              )),
           backgroundColor: Theme.of(context).primaryColor,
           bottom: PreferredSize(
             child: Container(
@@ -95,25 +96,43 @@ class MainPage extends StatelessWidget {
             vRegularSpace,
             const DividerWithTitle(title: 'Dough'),
             vRegularSpace,
-            IngredientComponent(title: 'Flour', value: model.calculateAmount(ingredient: Ingredient.Flour)),
+            IngredientComponent(
+                title: 'Flour',
+                value: model.calculateAmount(ingredient: Ingredient.Flour)),
             vBigSpace,
-            IngredientComponent(title: 'Water', value: model.calculateAmount(ingredient: Ingredient.Water)),
+            IngredientComponent(
+                title: 'Water',
+                value: model.calculateAmount(ingredient: Ingredient.Water)),
             vBigSpace,
-            IngredientComponent(title: 'Active Dry Yeast', value: model.calculateAmount(ingredient: Ingredient.Yeast) ),
+            IngredientComponent(
+                title: 'Active Dry Yeast',
+                value: model.calculateAmount(ingredient: Ingredient.Yeast)),
             vBigSpace,
-            IngredientComponent(title: 'Salt', value: model.calculateAmount(ingredient: Ingredient.Salt) ),
+            IngredientComponent(
+                title: 'Salt',
+                value: model.calculateAmount(ingredient: Ingredient.Salt)),
             vRegularSpace,
             const DividerWithTitle(title: 'Sauce'),
             vRegularSpace,
-            IngredientComponent(title: 'Tomatoes', value: model.calculateAmount(ingredient: Ingredient.Tomatoes) ),
+            IngredientComponent(
+                title: 'Tomatoes',
+                value: model.calculateAmount(ingredient: Ingredient.Tomatoes)),
             vBigSpace,
-            IngredientComponent(title: 'Olive Oil', value: model.calculateAmount(ingredient: Ingredient.OliveOil) ),
+            IngredientComponent(
+                title: 'Olive Oil',
+                value: model.calculateAmount(ingredient: Ingredient.OliveOil)),
             vBigSpace,
-            IngredientComponent(title: 'Salt', value: model.calculateAmount(ingredient: Ingredient.SauceSalt) ),
+            IngredientComponent(
+                title: 'Salt',
+                value: model.calculateAmount(ingredient: Ingredient.SauceSalt)),
             vBigSpace,
-            IngredientComponent(title: 'Basil', value: model.calculateAmount(ingredient: Ingredient.Basil) ),
+            IngredientComponent(
+                title: 'Basil',
+                value: model.calculateAmount(ingredient: Ingredient.Basil)),
             vBigSpace,
-            IngredientComponent(title: 'Pepper', value: model.calculateAmount(ingredient: Ingredient.Pepper) ),
+            IngredientComponent(
+                title: 'Pepper',
+                value: model.calculateAmount(ingredient: Ingredient.Pepper)),
             vRegularSpace,
           ],
         ));
