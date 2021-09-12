@@ -1,6 +1,6 @@
 enum PizzaSize {
   Small,
-  Medium,
+  Regular,
   Large,
 }
 

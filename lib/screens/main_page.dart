@@ -77,9 +77,9 @@ class MainPage extends StatelessWidget {
                       onTap: () => model.setSize(PizzaSize.Small)),
                   hTinySpace,
                   GenericButton(
-                      title: 'Medium',
-                      active: model.size == PizzaSize.Medium ? true : false,
-                      onTap: () => model.setSize(PizzaSize.Medium)),
+                      title: 'Regular',
+                      active: model.size == PizzaSize.Regular ? true : false,
+                      onTap: () => model.setSize(PizzaSize.Regular)),
                   hTinySpace,
                   GenericButton(
                       title: 'Large',

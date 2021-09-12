@@ -22,14 +22,13 @@ class GeneralServices extends ChangeNotifier {
 
   bool getDarkMode() => _preferences!.getBool(_keyDarkMode) ?? false;
 
- 
   bool usaMode = false;
   void setUsaMode(bool val) {
     usaMode = val;
     notifyListeners();
   }
 
-  PizzaSize size = PizzaSize.Medium;
+  PizzaSize size = PizzaSize.Regular;
 
   setSize(PizzaSize newSize) {
     size = newSize;
@@ -38,7 +37,7 @@ class GeneralServices extends ChangeNotifier {
 
   double get sizeConversion {
     switch (size) {
-      case PizzaSize.Medium:
+      case PizzaSize.Regular:
         {
           return 1;
         }
@@ -76,7 +75,7 @@ class GeneralServices extends ChangeNotifier {
         return '';
       case 25:
         return '¼';
-      case 5:
+      case 50:
         return '½';
       case 75:
         return '¾';
@@ -85,14 +84,15 @@ class GeneralServices extends ChangeNotifier {
     }
   }
 
-  String roundToNearestQuarter(double unitsPerOne) {
-    double am = ((unitsPerOne * amount * sizeConversion) / 0.25).round() * 0.25;
+  String roundToNearestQuarter(double number) {
+   
+    double am = ((number) * 4).round() / 4;
+    
     int frac = int.parse(am.toStringAsFixed(2).split('.')[1]);
     return am.floor().toStringAsFixed(0) + fraction(frac);
   }
 
-  String calculateAmount(
-      {required Ingredient ingredient}) {
+  String calculateAmount({required Ingredient ingredient}) {
     String amount = getAmount(ingredient);
     String unit = getUnit(ingredient);
 
@@ -105,7 +105,8 @@ class GeneralServices extends ChangeNotifier {
         return (USA_PER_SERVING_MAP[ingredient]! * amount * sizeConversion)
             .toStringAsFixed(ingredient == Ingredient.Water ? 1 : 0);
       }
-      return roundToNearestQuarter(USA_PER_SERVING_MAP[ingredient]!);
+      return roundToNearestQuarter(
+          USA_PER_SERVING_MAP[ingredient]! * amount * sizeConversion);
     }
     return (PER_SERVING_MAP[ingredient]! * amount * sizeConversion)
         .toStringAsFixed(0);
@@ -117,7 +118,4 @@ class GeneralServices extends ChangeNotifier {
     }
     return UNIT_MAP[ingredient]!;
   }
-
 }
-
-
