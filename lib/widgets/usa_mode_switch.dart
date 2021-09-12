@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_calc/constants/spacing.dart';
@@ -16,7 +16,7 @@ class USAModeSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Platform.isIOS ? 90 : 60,
+      height: kIsWeb || Platform.isAndroid ? 60 : 90,
       decoration: BoxDecoration(
           border: Border(
               top: BorderSide(

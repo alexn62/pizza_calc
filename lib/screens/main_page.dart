@@ -64,8 +64,6 @@ class MainPage extends StatelessWidget {
         body: ListView(
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             vRegularSpace,
             Padding(
@@ -108,9 +106,9 @@ class MainPage extends StatelessWidget {
             vRegularSpace,
             IngredientComponent(title: 'Tomatoes', value: model.tomatoes),
             vBigSpace,
-            IngredientComponent(title: 'Olive Oil', value: model.olive_oil),
+            IngredientComponent(title: 'Olive Oil', value: model.oliveOil),
             vBigSpace,
-            IngredientComponent(title: 'Salt', value: model.sauce_salt),
+            IngredientComponent(title: 'Salt', value: model.sauceSalt),
             vBigSpace,
             IngredientComponent(title: 'Basil', value: model.basil),
             vBigSpace,

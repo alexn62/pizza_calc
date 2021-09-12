@@ -82,17 +82,19 @@ class GeneralServices extends ChangeNotifier {
     }
   }
 
+  String roundToNearestQuarter(double unitsPerOne) {
+    double am = ((unitsPerOne * amount * sizeConversion) / 0.25).round() * 0.25;
+    int frac = int.parse(am.toStringAsFixed(2).split('.')[1]);
+    return am.floor().toStringAsFixed(0) + fraction(frac);
+  }
+
   // flour
   static const int FLOUR_PER_SERVING_GRAMS = 200;
   static const double FLOUR_PER_SERVING_CUPS = 1.25;
 
   String get flour {
     if (usaMode) {
-      double am =
-          ((FLOUR_PER_SERVING_CUPS * amount * sizeConversion) / 0.25).round() *
-              0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' cups';
+      return roundToNearestQuarter(FLOUR_PER_SERVING_CUPS) + ' cups';
     }
     return (FLOUR_PER_SERVING_GRAMS * amount * sizeConversion)
             .toDouble()
@@ -121,11 +123,7 @@ class GeneralServices extends ChangeNotifier {
 
   String get yeast {
     if (usaMode) {
-      double am =
-          ((YEAST_PER_SERVING_TSP * amount * sizeConversion) / 0.25).round() *
-              0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' tsp';
+      return roundToNearestQuarter(YEAST_PER_SERVING_TSP) + ' tsp';
     }
     return (YEAST_PER_SERVING_GRAMS * amount * sizeConversion)
             .toStringAsFixed(0) +
@@ -138,11 +136,7 @@ class GeneralServices extends ChangeNotifier {
 
   String get salt {
     if (usaMode) {
-      double am =
-          ((SALT_PER_SERVING_TSP * amount * sizeConversion) / 0.25).round() *
-              0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' tsp';
+      return roundToNearestQuarter(SALT_PER_SERVING_TSP) + ' tsp';
     }
     return (SALT_PER_SERVING_GRAMS * amount * sizeConversion)
             .toStringAsFixed(0) +
@@ -153,14 +147,9 @@ class GeneralServices extends ChangeNotifier {
   static const int SAUCE_SALT_PER_SERVING_GRAMS = 3;
   static const double SAUCE_SALT_PER_SERVING_TSP = 0.5;
 
-  String get sauce_salt {
+  String get sauceSalt {
     if (usaMode) {
-      double am =
-          ((SAUCE_SALT_PER_SERVING_TSP * amount * sizeConversion) / 0.25)
-                  .round() *
-              0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' tsp';
+      return roundToNearestQuarter(SAUCE_SALT_PER_SERVING_TSP) + ' tsp';
     }
     return (SAUCE_SALT_PER_SERVING_GRAMS * amount * sizeConversion)
             .toStringAsFixed(0) +
@@ -173,11 +162,7 @@ class GeneralServices extends ChangeNotifier {
 
   String get tomatoes {
     if (usaMode) {
-      double am = ((TOMATOES_PER_SERVING_CUPS * amount * sizeConversion) / 0.25)
-              .round() *
-          0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' cups';
+      return roundToNearestQuarter(TOMATOES_PER_SERVING_CUPS) + ' cups';
     }
     return (TOMATOES_PER_SERVING_GRAMS * amount * sizeConversion)
             .toDouble()
@@ -196,15 +181,11 @@ class GeneralServices extends ChangeNotifier {
 
   // olive oil
   static const int OLIVE_OIL_PER_SERVING_ML = 5;
-  static const int OLIVE_OIL_PER_SERVING_TSP = 1;
+  static const double OLIVE_OIL_PER_SERVING_TSP = 1;
 
-  String get olive_oil {
+  String get oliveOil {
     if (usaMode) {
-      double am = ((OLIVE_OIL_PER_SERVING_TSP * amount * sizeConversion) / 0.25)
-              .round() *
-          0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' tsp';
+      return roundToNearestQuarter(OLIVE_OIL_PER_SERVING_TSP) + ' tsp';
     }
     return (OLIVE_OIL_PER_SERVING_ML * amount * sizeConversion)
             .toStringAsFixed(0) +
@@ -217,12 +198,7 @@ class GeneralServices extends ChangeNotifier {
 
   String get pepper {
     if (usaMode) {
-      double am =
-          ((SAUCE_PEPPER_PER_SERVING_TSP * amount * sizeConversion) / 0.25)
-                  .round() *
-              0.25;
-      int? frac = int.tryParse(am.toString().split('.')[1]);
-      return am.floor().toString() + fraction(frac) + ' tsp';
+      return roundToNearestQuarter(SAUCE_PEPPER_PER_SERVING_TSP) + ' tsp';
     }
     return (SAUCE_PEPPER_PER_SERVING_GRAMS * amount * sizeConversion)
             .toStringAsFixed(0) +
