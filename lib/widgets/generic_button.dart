@@ -21,7 +21,7 @@ class GenericButton extends StatelessWidget {
           height: 30,
           decoration: BoxDecoration(
               color: active ? Theme.of(context).backgroundColor : Theme.of(context).primaryColor,
-              border: Border.all(color: active ? Theme.of(context).primaryColor : Theme.of(context).backgroundColor),
+              border: Border.all(color: Theme.of(context).backgroundColor),
               borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: Text(
