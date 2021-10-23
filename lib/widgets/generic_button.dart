@@ -20,13 +20,18 @@ class GenericButton extends StatelessWidget {
         child: Ink(
           height: 30,
           decoration: BoxDecoration(
-              color: active ? Theme.of(context).backgroundColor : Theme.of(context).primaryColor,
-              border: Border.all(color: active ? Theme.of(context).primaryColor : Theme.of(context).backgroundColor),
+              color: active
+                  ? Theme.of(context).backgroundColor
+                  : Theme.of(context).primaryColor,
+              border: Border.all(color: Theme.of(context).backgroundColor),
               borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: Text(
               title,
-              style: TextStyle(color: active ? Theme.of(context).primaryColor : Theme.of(context).backgroundColor),
+              style: TextStyle(
+                  color: active
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).backgroundColor),
             ),
           ),
         ),
